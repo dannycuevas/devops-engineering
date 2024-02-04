@@ -1,0 +1,18 @@
+-You have build a website, which is now hosted on a server, you bought a domain so you can share it with the world
+tourism.mars
+Your website is now famous and you have thousands of users using it to to book flights to Mars.
+
+# The development workflow
+Now let us look at how that happens in our development workflow. This workflow is a 3 step workflow.
+Current workflow involves the:
+
+### Development phase
+Where you write code on your laptop. But now the code in text format is not good enough to run, to run it as an Application by the end user it needs to be in an "executable format" (for windows for example), or in a "binary file" (for linux for example).
+
+>And converting code from a text format to a binary or executable format is known as "building the code".
+
+### Build
+There are tools available like python setup tools, or MAVEN or Gradle for other platforms. And you usually have a "build script" that invokes those mentioned tools (depending on what you use) to start the process of building the application.
+
+### Deploy Stage
+Once build, the executable is moved to a PROD environment, in this case, our server hosting the webapp for the Mars flight, and run in PROD, and that is refer to as "Deploy Stage.
