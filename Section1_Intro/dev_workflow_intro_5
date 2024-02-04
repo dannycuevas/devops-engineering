@@ -1,0 +1,50 @@
+-Currently we still have 1 server, but with our users increasing, we will want to be able to add more servers and run our application on all of them
+
+-Since we now have containers, all we need to do is run containers on the servers
+
+-But how to do that the right way, so that containers are just "spun up" when the users increased, and destroy those servers and containers when the LOAD reduces?
+
+-Or how do you ensure that if a container fails, it is automatically brought back up and running?
+
+-And this is where "Container Orchestration" platforms come in
+
+
+# KUBERNETES
+
+-Kubernetes is a powerful and popular container orchestration platform that helps declare how containers should be deployed, and ensure that it is always run in the same way as "declared"
+
+-It can help auto-scale containers as well as the underlying infrastructure, all BASED on need/demand, and managed resources on the underlying servers to ensure optimal resource utilization
+
+
+# What is our progress like?
+-By now we have developers pushing code to a central GitHub repository
+-The CI CD pipeline then pulls the code to the build server, builds it to Docker images
+-And then that image is used to test the application in the test environment
+-Finally, deploy it to your PROD environment as containers by Kubernetes
+
+-Now, the underlying infrastructure is still one big challenge
+
+-To automate the provision of your infrastructure environment, we have some tools like
+Terraform
+
+
+# TERRAFORM
+
+-Terraform automates the provision and configuration of your infrastructure environment (like all the servers for example)
+
+-It ensures that the servers configured are always in the same state
+
+
+# ANSIBLE
+
+-Once the servers, the underlying infrastructure, are provisioned, the configuration of these servers can be automated by tools like Ansible
+
+-Ansible is an automation tool that helps configure the infrastructure once provisioned
+
+-Ansible is used for POST configuration activities such as installing the software and configuring them on those servers
+
+-Similar to Terraform, Ansible uses code to configure servers, it is called "Ansible Playbooks", so this code can also goes to the source code repository
+
+
+# WHAT IS DEV OPS?
+-DevOps is a combination of people, processes and tools, that work together in going from an "idea", to execution, and delivering high quality software consistently

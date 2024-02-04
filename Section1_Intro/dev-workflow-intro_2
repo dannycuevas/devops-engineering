@@ -1,0 +1,26 @@
+-Now with our developers, and Git and GitHub in place, the development organization is sorted out. However, we still need to move the code manually to the PROD environment every time something new has been deployed.
+
+-So the previous workflow was:
+    -Developing code in your development environment
+    -Then "building" the code to an executable package
+    -And then deploying it to the PROD environment
+    
+-However, now with a team of multiple developers, the code needs to be build with the changes contributed by all of the developers.
+
+-So now pushing "new builds" to PROD is risky as it might have some new bugs or broken something that was previously working.
+
+-Because of this, we now need to TEST it in a "test environment" too.
+
+### New Workflow
+-So here is how the workflow is looking now:
+
+1- Every developer develops code in their "development environment", meaning in their own laptops. Then pushes that new code into GitHub.
+2- We then manually copy the code to the "build server" which "builds" the code into an executable.
+3- Then manually copy that executable to the test server, and test the application to make sure it works as expected.
+4- And then manually copy that executable to PROD environment and deploy the application.
+
+-As we can see, this is a very manuak job, and requires a set of manual tasks, so we decided to move all the new code (that the developers push from their laptops) to the PROD environment "once a week".
+
+-However, this might not be very well implemented, as for example some changes are minor and are ok to just be deployed, hence the waiting period approach is not the best
+
+-Also, our objective is to be able to release features faster and more frequently with less and less manual effort. This is where CI CD tools come into play.

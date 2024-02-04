@@ -1,0 +1,28 @@
+-However, it is still not all that seamless
+
+# Dependencies
+-Remember, there are "dependencies" and "libraries", and these are required for the built applications to run in a determined system (like your PROD server)
+
+-These dependencies need to be configured the exact same way on the servers where you are deploying your applications to
+
+-Also meaning, if a new package id required, this needs to be manually installed and configured on ALL the servers where your applications run
+
+-Now, if for example, you miss out configuring one of these packages with the right "version" in the right way, it will lead to the software not working and resulting in unexpected outcomes in the rest of the systems or servers
+
+-This is where containers come in
+
+# Containers
+-Containers help package the application AND its dependencies into an image that can then be run on any desired system, without having to worry about dependencies
+
+-So now, during the BUILT, you will build a container image with the application and its dependencies packaged into it
+
+-And all other systems can now simply run a container from that image without worrying about installing and configuring libraries and dependencies
+
+
+# DOCKER
+
+-With Docker, the developer can create a Docker file which specifies what the dependencies are, and that Docker file can be used during the "built" to build an image
+
+-And now that image, can then be run on any server using a simple "docker run command", which will run a container of that image
+
+-Each container is an "isolated instance" and this allows to run multiple containers, each having its own separate instance of the application on the same server

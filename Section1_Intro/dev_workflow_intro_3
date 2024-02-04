@@ -1,0 +1,26 @@
+# CI CD
+
+-This stands for
+Continuous Integration
+Continuous Delivery / Deployment
+
+-These are tools like
+jenkins
+GitHub Actions
+Azure DevOps
+GitLab CI CD
+They will help you automate all the manual labor mentioned before, by building a "Pipeline".
+
+### Pipeline
+-With one of these tools configure, every time code is pushed,
+    -It is automatically PULLED from the GitHub repository
+    -To the build server, and then built it
+    -Then the executable is automatically move to the test server, and tested
+    -And it is automatically moved to the PROD server and deployed
+
+-This allows changes, features, and bug fixes, to move much faster through the pipeline and be deployed much more often with lesser manual effort
+
+-This will ultimately enable the team to resolve issues quicker ship features faster, and make your users happier
+
+### Automating Workflow
+-Now with git, github, and CICD pipelines in place, we have enabled our team to make changes to our application, and get them to PROD servers much more efficiently and seamlessly
