@@ -1,0 +1,17 @@
+# GIT
+
+-GIT helps all developers to work on the same project at the same time and collaborate efficiently.
+
+-We install and configure GIT on our local machines, and that will allow us to PULL our code files from a "central hub", using the "git pull" command.
+
+-From here we can add our own changes to the code/project and then push it back into the central hub, using the "git push" command.
+
+
+### Central Hub
+-This will more than likely be a cloud based platform that serves as the central location for all of the code for this project or company.
+
+-Meaning, GIT is the underlying technology and GitHub is the publicly hosted git based central repository for all out code. Also, this is where you can configure project organizations users and define different roles for different users etc.
+
+>Some other similar platforms are GitLab, and Bitbucket.
+
+
