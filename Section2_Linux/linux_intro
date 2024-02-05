@@ -6,3 +6,7 @@ echo "Hello world"
 -Check the environment variable for your default shell
 echo $SHELL
 
+-List the contents of the current directory
+ls
+
+-
