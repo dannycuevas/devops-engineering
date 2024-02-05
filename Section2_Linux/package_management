@@ -1,0 +1,52 @@
+# PACKAGE MANAGERS
+
+-They help install various software on the Linux system, such as;
+  -webservers
+  -database servers
+  -devops tools
+  -or dependent softwares
+
+### RPM
+-CentOS uses RPM based package manager, just like RedHat or Fedora
+
+-RPM stands for Red Hat Package Manager
+
+-A Software is package into a bundle with the extension "rpm" to install that said package, so we use the rpm command to install that package calling it by its name, using to "-i" option that means "install"
+
+rpm -i PACKAGE.rpm
+rpm -i telnet.rpm
+
+-To uninstall a package use the -e option
+
+rpm -e telnet.rpm
+
+-To query the database and get details about an installed package use it with the -q option
+
+rpm -q telnet.rpm
+
+### YUM
+-Yum is a high level package manager that uses RPM underneath, running a simple "yum install" command will install Ansible AND all of its dependencies. Where RPM command will only install Ansible and not any of the dependencies, that is why yum is a "high level" package manager.
+
+-YUM searches software reporsitories that contain hundreds of thousands of RPM package files, these repositories can be both local or in a remote location
+
+-So, under the hood, YUM still makes use of the RPM package manager, and so when yum searches in the software repositories, it finds the required packages and dependencies, and installs all of them in the correct order
+
+-To see a list of repositories available on a system
+yum repolist
+
+-Show the files where those repos are configured
+ls /etc/yum.repos.d/
+
+-See a list of installed or available packages
+yum list package_name
+yum list ansible
+
+-Remove an installed package
+yum remove package_name
+
+-List all available versions of a package
+yum --showduplicates list package_name
+
+-Install a specific version of a package, by using the package name and its version number
+yum install package_name-x.x.x.x
+yum install ansible-2.4.2.0

@@ -9,6 +9,10 @@ echo $SHELL
 -List the contents of the current directory
 ls
 
+-Look at the current OS name
+ls /etc/*release*
+cat /etc/*release*
+
 -Move to another directory
 cd DIR-NAME
 
@@ -42,3 +46,22 @@ cat new_file1.txt
 
 -Delete a file
 rm new_file1.txt
+
+
+## More Linux Commands
+
+-More information about the current user, like the user's ID, or the groups that the user is a member of
+id
+
+-Switch from one user to another
+su USERNAME
+
+-Grant your current user "sudo" privileges as if the super user
+sudo COMMAND
+
+-Download a file from the internet, using capital "O" option (not zero), this will download the file keeping its original name
+curl url-link.com -O
+
+-Another tool to download a file from the internet, also using the -O option, this option allows to rename the downloaded file
+wget url-link.com -O file-name.txt
+

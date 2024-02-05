@@ -1,0 +1,65 @@
+# SERVICES IN LINUX
+
+-Once you install a software on your servers, especially those that run in the "background", such as "web servers", you will need to make sure that that software-services are Running, and that they STAY running even after the servers are rebooted for whatever reason
+
+-Services in Linux can help you configure software to run in the background, and make sure that they run ALL  the time automatically even after the servers are rebooted, as well as they follow the right ORDER of startup
+
+-Command to start a service, in this example, httpd is Apache WebServer
+service SERVICENAME start
+service httpd start
+
+-Newer command to start a service
+systemctl start service_name
+systemctl start httpd
+
+-Stop a running service
+systemctl stop service_name
+
+-Check the status of a service
+systemctl check service_name
+
+-Configure a service to start automatically when the system boots up
+systemctl enable service_name
+
+-Disable a service at the system boot up time
+systemctl disable service
+
+
+### Configures a program as a Service
+
+-Say for example you have a simple Python program and it could be a simple web server that is developed in Python, and the code is available at /opt/code/my_app.py 
+
+/usr/bin/python3 /opt/code/my_app.py
+
+-You can run this server with the python interpreter, and once it is running, you can call the local host for port 5000, and you will see you will receive a response from the server
+
+curl http://localhost:5000/
+hello world!
+
+-We now have this web server running on our system, and we want to configure it as a "Service", so you want the program to run as a service so that when the system is boot up, or when you run the "systemctl" command, it will start as well
+
+-This is so we as admins, do not have to worry about manually starting the WebServer, or the paths to the files, etc, and so all that will be needed to do will be to run the command
+systemctl start SERVICE-NAME
+
+-First, we will need to configure our program as a "systemd" service, by creating a unit file in the systemd directory
+
+/etc/systemd/system
+
+-The file must be named with the name that you will eventually want the service to be known as, and with the service extension which is ".service"
+
+my_app.service
+
+-Body of this said file, where we will specify the command that is used to start running the application
+
+[Service]
+ExecStart=/usr/bin/python3 /opt/code/my_app.py
+
+-Then we will just need to refresh or reload the systemd on our machine, so we can let systemd know that there is a new system configured, and then start the service as a normal service
+
+systemctl daemon-reload
+systemctl start my_app
+systemctl status my_app
+
+-We have added a new python flask based service called app. In which systemd unit file is this service configured?
+You can check status of app service by running systemctl status app, where you can also find location for service file under /usr/lib/systemd/system/
+/usr/lib/systemd/system/app.service
