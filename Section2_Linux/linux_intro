@@ -22,4 +22,23 @@ mkdir
 cd new_dir1; mkdir lowdir_1; pwd
 
 -Create a directory tree in a single command
-mkdir 
+mkdir -p /tmp/asia/india/bangalore
+
+-To remove a directory and all of its contents
+rm -f dir_name1
+
+-Copy a directory and all of its contents to another location
+cp -r new_dir1 /tmp/asia/india/new_dir1
+
+-Create a new file (with no contents)
+touch new_file1.txt
+
+-Add some text to a file
+cat > new_file1.txt
+Add text here to the file
+
+-View the contents of a file
+cat new_file1.txt
+
+-Delete a file
+rm new_file1.txt
