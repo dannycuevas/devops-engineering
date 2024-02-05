@@ -9,4 +9,17 @@ echo $SHELL
 -List the contents of the current directory
 ls
 
--
+-Move to another directory
+cd DIR-NAME
+
+-Display the current directory
+pwd
+
+-Create a new directory
+mkdir
+
+-Use a semicolon to run different commadns together
+cd new_dir1; mkdir lowdir_1; pwd
+
+-Create a directory tree in a single command
+mkdir 
