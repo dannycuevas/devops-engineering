@@ -1,0 +1,8 @@
+# INTRO TO LINUX AND LINUX TERMINAL
+
+-Print a line of text to the screen
+echo "Hello world"
+
+-Check the environment variable for your default shell
+echo $SHELL
+
