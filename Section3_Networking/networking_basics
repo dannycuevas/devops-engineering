@@ -1,0 +1,54 @@
+# INTRO TO NETWORKING
+
+### Switch
+-Can connect devices together within the same network, and will assign segmented IPs to these devices so that they are able to communicate with one another
+
+-To see the interfaces (like a network card) of the host
+ip link
+
+### Router
+-Allows switches from different networks to communicate with one another, hence, their devices will be able to communicate from one switch to devices in a different switch as well
+
+-Since it connects to different "networks" (swtiches), for every connection to these networks it gets its own IP address, based on the switch IP address. Think of every connection to each switch as a "tunnel", and every tunnel gets its own "name", which in this case the name would be its own IP address
+
+-So, a Router, is just another device on the network, this is where we configure the "systems" with a Gateway or a Route
+-If a network was a room for example, the gateway would be a door to the outside world meaning to the other networks or to the internet
+
+
+### Gateway and Routing
+-The systems need to know where that door is to go through it, and to see the existing routing configuration on a system use the following command, it will display the kernel routing table
+
+route
+
+In here, you will be able to see if system B in one network will be able to reach system C in another network
+
+-To configure a gateway on system B to reach system C (which is in the second network), run the ip route command using the target Network IP address AND the local network gateway IP address, which is in your network "Switch"
+
+-Basically saying;
+  -what is the target Network to be reached
+  -what is the local gateway network to get "out of" to reach the target Network
+
+ip route add NETWORK-ADDRESS via LOCAL-GATEWAY
+ip route add 192.168.2.0/24 via 192.168.1.1
+
+-You can also say, for any network that you do not know a route to, use "this" router as the default gateway, this way any request to ANY network outside of your existing network goes to "this" particular router
+
+ip route add default via 192.168.2.1
+
+-So if you are having issues reaching internet from your systems, this "routing tables" and the default gateways are a good place to start
+
+
+# QUIZ
+
+1-Now if you try to SSH into each app one by one from jump host you will find that you are able to SSH into app01 and app02 but not into app03 and app04. Why so ?
+=In the previous question, we assigned the new IPs to app servers.
+We assigned app01 & app02 to 172.16.238.x and app03 & app04 to 172.16.239.x which is in different network range.
+So you can check the same for jump host by running ip a command, you will see that it's in the same network range of app01 and app02 that's why we are able to SSH.
+
+2-Since now app03 and app04 are on different network range than jump host so you are not able to SSH into those hosts from jump host. To make SSH work make required changes on jump host.
+
+
+a. Assign a new IP address 172.16.239.10/24 to jump host with same network range which app03 and app04 are using.
+b. Now you will be able to SSH into all apps from jump host.
+
+=Use command: sudo ip addr add 172.16.239.10/24 dev eth0

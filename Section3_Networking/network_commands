@@ -1,0 +1,20 @@
+# NETWORK KEY COMMANDS
+
+-List and modify interfaces on the host IP, like network cards for example
+ip link
+
+-List IP addresses assigned to those interfaces
+ip addr
+
+-Set IP addresses on the interfaces, calling the interface names
+ip addr add IP-ADDRESS dev ethos
+sudo ip addr add 172.16.239.10/24 dev eth0
+
+-View the routing table
+ip route
+
+-Add entries into the routing table
+ip route add TARGET-NETWORK-IP-ADDRESS via LOCAL-GATEWAY-IP-ADDRESS
+
+-Check if IP forwarding is enabled on a host
+cat /proc/sys/net/ipv4/ip_forward
