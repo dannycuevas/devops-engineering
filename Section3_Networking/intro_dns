@@ -132,3 +132,30 @@ address:      172.217.0.132
 ### dig
 -It is another useful tool to test DNS name resolution
 -It returns more details in a similar form as is stored
+
+
+# QUIZ
+
+1-At basic level what is DNS used for ?
+=to resolve the IP address of a domain name
+
+2-On a Linux based system, which of the following file can be used to point domains/hostnames to IPs locally?
+=/etc/hosts
+
+3-On a Linux based system, which of the following file contains information about dns server i.e nameserver?
+=/etc/resolv.conf
+
+4-On host01, point www.google.com to 127.0.0.1 IP address locally.
+=sudo vi /etc/hosts
+Add 127.0.0.1 www.google.com entry in /etc/hosts file.
+
+5-On host01, add Google public DNS i.e 8.8.8.8 as a nameserver.
+=sudo vi /etc/resolv.conf
+On host01, add Google public DNS i.e 8.8.8.8 as a nameserver.
+
+6-On host01 we want to resolve name news to news.yahoo.com automatically without hard coding its entry in /etc/hosts file. Add the required changes on host01.
+=sudo vi /etc/resolv.conf
+Add search yahoo.com entry in /etc/resolv.conf file.
+
+7-Which of the following command is used to query a hostname from a DNS server?
+=nslookup
