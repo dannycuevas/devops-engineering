@@ -1,0 +1,38 @@
+
+# INTRODUCTION TO APPLICATIONS
+
+-Here we will understand the basics of application development in different types of languages
+
+-Also, we will see, if you were given an application to "deploy", how do you deploy it?
+
+-We will see a bit about how an application is compiled, and what a source code or machine code is
+
+-So, if a developer gives you an "application code", what do you need to know in order to build, test, or deploy this application?
+
+### Programing Languages
+
+-The different programming languages can be bradly classify into 2 types:
+
+    1-Compiled
+    2-Interpreted
+
+### Compiled
+-Compiled languages such as C, C++, Java, are FIRST developed, then "compiled", and then "executed"
+
+-Compiled languages are first written, then compiled into machine language code and then "executed"
+
+-A Compiled Program only works on the platforms it was designed for
+
+
+### Interpreter
+-Interpreted languages such as Python, ruby, nodejs, are "developed", and then "executed"
+
+-In an interpreted programmin language, you develop the source code then you run it using an interpreter, example, you have a python application, you develop it first and then you run it using the python interpreter
+
+-In this case, we want our laptop to run this python application and perform the tasks we ask it to perform, however the machine can not understand the python language as is in its current format
+
+
+### The Compiler
+-So we will need to convert that python code into a "machine code" that is readable by our machine that is in "zeros and ones" (01010101), and this is where the compiler comes in
+
+-A compiler translates code written in one language to another language, so it changes from "human readable code" to "machine readable code", and it is done differently in different programming languages

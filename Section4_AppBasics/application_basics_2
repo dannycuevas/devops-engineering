@@ -1,0 +1,28 @@
+
+# PACKAGES / MODULES / LIBRARIES
+
+-When a developer develops code that can be "reused", they share it to the public community as "packages" that can be "reused"
+
+-So they are also referred to as "modules" or "libraries", just depending on the programming language being used
+
+-These could be libraries to help work with file systems,
+    perform math operations,
+    interact with operating systems,
+    or packages for developing different kinds of applications like web-servers,
+    implementing security networking, etc
+
+-And so, applications use these packages in their code as "dependencies"
+
+-These dependencies must be available for the applications to run; these dependencies are handled by different tools for different programming languages such as:
+    NPM for nodejs
+    PIPP for python
+    etc
+
+-Understanding the basics of "package management" can help you better understand "build processes" and aid in troubleshooting issues that may arise fue to "dependency" errors
+
+-When an application is coded, it goes through a procedure of
+    development
+    build
+    test
+    delivery
+and DevOps tries to automate those tasks with CI CD pipelines
