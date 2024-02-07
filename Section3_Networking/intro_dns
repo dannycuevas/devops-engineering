@@ -1,0 +1,134 @@
+# INTRO TO DNS ON LINUX
+
+### Name Resolution
+-Basically, you want to tell your local system, to communicate with a remote server using a "name" instead of the long and complicated IP address, example:
+
+Using command "ping database01" instead of "ping 214.324.33.3"
+
+-You can enable that by adding an "entry" into the file:
+/etc/hosts
+
+cat >> /etc/hosts
+214.324.33.3    database01
+
+-You can have as many names as you want for as many servers as you want in the /etc/hosts file
+
+cat >> /etc/hosts
+214.324.33.3    database01
+214.324.33.3    www.example.com
+
+ping database01
+ping www.example.com
+
+-Translating "hostanme" to "IP address" this way, is know as:
+Name Resolution
+
+
+### DNS SERVER
+-And that was how it was done in the past; until the environment grew and these files in each server got to big filled with too many entries from all of the other servers in the environment, and so managing all of these files became too complex and slow
+
+-Also, if one of the servers IP address was to change, then you would need to modify the entries in all of the other servers in the environment as well
+
+-And this is where it was decided to move all these entrie-files into a SINGLE server who will manage it centrally, we called it;
+DNS Server
+
+-And then we point ALL of the servers in the environment to look up that server if they needed to resolve any HOSTNAME to an IP address, instead of looking at its own individual /etc/hosts file like in the past
+
+-How do we point all of the servers to the DNS server?
+Well, every host has a "DNS resolution configuration file" located in:
+/etc/resolv.conf
+
+So then, you add an entry into specifying the address of the DNS server
+cat /etc/resolv.conf
+nameserver    192.168.1.100   #DNS server IP address here
+
+-Once this is configured in all of your hosts/servers, every time one your hosts is looking up a hostname that does not know about, it will look it up in the DNS server
+
+-If the IP address of of the hosts was to change, you then simply update the DNS server, and all hosts should that resolve properly going forward
+
+
+### HOST FILE
+-Using a DNS server does not mean you will not longer be able to use the /etc/hosts file, you still can use it
+
+-What if you have clone entries for a single IP in both the local hosts file and on the DNS server?
+In that case, the machine looks in the local /etc/hosts file first and then looks in the DNS server, but if it finds the entry in the local /etc/hosts file it uses that, if not, it looks for that host-name in the DNS server
+
+-But that order can be changed; the order is defined by an entry in:
+
+cat /etc/nsswitch.conf
+hosts :   files   dns
+
+-"Files" refers to /etc/hosts file, AND "dns" refers to the DNS server, in that specific order right now, so change the order here in this file to change the order in the system
+
+
+# DOMAIN NAME
+www.google.com
+
+-That www page is called a "domain name", and it is how the IP address is translated to "actual names" that we humans could remember on the public internet
+
+### Top Level Domain
+-They are the SEPARATED by DOTS (.) is to "group like-things together", for example, the last portion of the domain names;
+.com (commercial or general purpose)
+.net (network)
+.edu (education)
+.org (non profit organization)
+etc
+
+These are the "top level domains" that represent the "intent" or objective of the website
+
+-Whereas the ROOT/SUB-DOMAIN is: www.
+-The domain name assigned is: google
+-And TOP is: .com
+
+-Here is an example of a sub-domain of Google;
+
+maps.google.com
+
+mail.mycompany.com
+
+-So what do you do to configure the DNS to resolve the subdomain of the web pages like mail.company.com ? You want to say that when you look up for "mail" you want results to "mail.company.com"
+
+-For this, we make an entry in your system "/etc/resolv.conf" file called "search" and specify the domain name you want to APPEND
+
+cat >> /etc/resolv.conf
+search      mycompany.com     prod.mycompany.com
+
+-Next time you try to ping "mail" you will see it actually tries "mail.company.com" and also "prod.mycompany.com"
+
+
+### RECORD TYPES
+-How are the records stored in the DNS server?
+
+A       web-server        192.168.1.1
+AAAA    web-server        2001:0db8:85a3:0000:0000:8a2e:0370:7334
+CNAME   food.web-server   eat.web-server, hungry.web-server
+
+-A Record
+We know that it stores IP - to - hostnames
+
+-AAAA ("quad a")
+Storing IPv6 to hostnames
+
+-C Name Record
+Mapping one domain name to another name (name-to-name-mapping)
+
+
+### nslookup
+-Ping command may not always be the right tool to "test DNS resolution", there are other tools as well such as:
+
+nslookup
+
+-It can be used to query a hostname from a DNS server
+
+nslookup www.google.com
+
+server:       8.8.8.8
+address:      8.8.8.8#53
+address:      172.217.0.132
+
+-Remember, this command nslookup, does NOT consider the entries in the local /etc/hosts file
+
+
+### dig
+-It is another useful tool to test DNS name resolution
+-It returns more details in a similar form as is stored

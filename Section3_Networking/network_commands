@@ -18,3 +18,9 @@ ip route add TARGET-NETWORK-IP-ADDRESS via LOCAL-GATEWAY-IP-ADDRESS
 
 -Check if IP forwarding is enabled on a host
 cat /proc/sys/net/ipv4/ip_forward
+
+--It can be used to query a hostname from a DNS server
+nslookup www.google.com
+
+-It is another useful tool to test DNS name resolution, it returns more details in a similar form as is stored
+dig
