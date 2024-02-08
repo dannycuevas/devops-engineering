@@ -1,0 +1,34 @@
+
+# INTRO TO JAVA AND NOTES
+
+-What does JDK mean?
+=Java Development Kit
+
+-Which tool is used for documenting your app with JDK?
+=javadoc
+
+-Which tool is used for compiling your app with JDK?
+=javac
+
+-Which tool is used for debugging your app with JDK?
+=jdb
+
+-Help us install java 20 inside /opt directory
+=first lets download the app inside the /opt directory
+
+sudo curl https://download.java.net/java/GA/jdk20/bdc68b4b9cbc4ebcb30745c85038d91d/36/GPL/openjdk-20_linux-x64_bin.tar.gz --output /opt/openjdk-20_linux-x64_bin.tar.gz
+
+Then we uncompress the taz.gz file
+
+sudo tar -xf /opt/openjdk-20_linux-x64_bin.tar.gz -C /opt/
+
+To verify run ""/opt/jdk-20/bin/java -version"" and confirm correct version is installed
+
+""openjdk version "20" 2023-03-21
+OpenJDK Runtime Environment (build 20+36-2344)
+OpenJDK 64-Bit Server VM (build 20+36-2344, mixed mode, sharing""
+
+-We need to set java binary path in environment PATH variable to use java binaries. So that you can simply run java instead of the full path.
+Once done, verify that you can invoke java simply by running java command.
+
+=Set path variable with the command export PATH=$PATH:/opt/jdk-20/bin

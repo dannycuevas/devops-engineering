@@ -1,0 +1,123 @@
+
+# BUILDING A JAVA APPLICATION
+
+-What is a build process in its simplest form?
+
+The application source code is first developed, then it is Compiled using the "javac" command, and then it is run
+
+>MyClass.java
+[block of java code]
+(human readable source code)
+
+>javac MyClass.java
+MyClass.class
+
+This creates a new file; again, which is the compiled version.
+we then run the application by running the compiled file using the Java loader
+
+Notice, at that point, you will not use the ".class" extension when running the application using the java command
+
+>java MyClass
+
+-So the objective is to convert the "human readable code" into "machine code", by compiling it manually using the "javac" command
+
+-The bytecode is then run inside of Java Virtual Machines known as JVMs, these are Java virtual computing environments that exist within the system
+
+-So this allows us to develop Java applications once, and run them anywhere, anywhere where there is a supported JVM available, so this truly makes java "cross platform"
+
+-Cross platform, meaning, you can develop your code once, and compile it, and then run it anywhere on any operating system
+
+
+### PACKAGE
+
+-All of that was compiling just ONE file, but a typical application may have many such files
+
+-Example:
+MyClass.class
+Service1.class
+Service2.class
+Utility.class
+Tools.class
+
+-They may be dependent on each other, or maybe have dependencies on external libraries to distribute the application to end users, we will need to "package it up"
+
+-And that is where an archiever like "JAR" can help
+
+-JAR stands for Java Archieve, and it helps compress and combine multiple "Java.class" files and dependent libraries and assets into a SINGLE distributable package
+
+
+### WEB APP CASE
+
+-In the case of a Web Application, there may be other files as well, such as static files and images that may be part of the application
+
+-In that case, all files are packaged into a "WAR" file, which stands for
+"Web Archive"
+
+
+### Creating the archive
+
+-So, to create an archive, user the jar command and specify the name of the output file, like "MyApp.jar", and the passing the list of files that need to be part of the archive
+
+jar cf MyApp.jar MyClass.class Service1.class Service2.class ...
+
+When this file is created, it automatically generates a manifest file within the package at
+META-INF/manifest.mf
+
+This file contains information about the files packaged in the jar file and any other metadata regarding the application
+
+Manifest-Version: 1.0
+Created-By: 1.8.0_242 (Private Build)
+Main-Class: MyClass
+
+-Once build and distributed, the application can be run on any system with the Java Runtime Environment installed, using the Java command
+
+
+### DOCUMENTATION
+
+-Our code also needs to be documented so that others can easily read and understand the various functionalities
+
+-And for that, we use the "java doc utility", running the command and specifying the "source code" as "input" can help up generate documentation,
+like creating an HTML version of the documentation of the code, that other developers can easily browse through
+
+javadoc -d doc MyClass.java
+
+
+# BUILD PROCESS
+
+1- Develop
+2- Compile / javac MyClass.java
+3- Package / jar cf MyClass.jar ...
+4- Documentation / javadoc MyClass.java
+
+-Of couse this "build process" also includes many other steps, suchs as:
+    tests
+    vulnerability scans
+    code signing
+    etc
+
+-Now, the "build process" can get very complex, specially the more developers are involved the more complex the application is
+
+
+### Build Tools
+-So that is where build tools can help you automate much of these processes
+
+-Some of the popular buld tools for JAVA are:
+    Maven
+    Gradle
+    Ant
+These tools use configuration files where you can specify the steps that you want the build tool to automate, such as the before mentioned steps of the build process
+
+-And these tools automatically execute these steps in whatever particular order that you want to define, for example, when you run "ANT", it will simply run all of the steps one after the other;
+    develop
+    compile
+    pacakge
+    document
+
+-In the case of Maven for example, you have the "pom.xml" file,
+this is where you have the "build instructions" configured, and they also have the instructions to run that build
+
+-And in the case of Gradle for example, you have the "build.gradle" file,
+and this is where you have the configuration with the commands use to "build the application" and then run the application
+
+-These "build tools" make it very easy to build and run applications so you do not really have to manually do hundreds of steps one after the other,
+because they automate all of those for you
