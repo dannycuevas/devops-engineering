@@ -1,0 +1,14 @@
+-Some operating systems come with python pre-installed, so run python2 or python3 to verify if it is installed properly
+
+yum install python2
+
+yum install python36
+
+-To invoke the python2 and python3 interpreter, run their respective command
+
+python2
+python3
+
+-Check their installed verions, with capital "V" not "v"
+
+python3 -V
