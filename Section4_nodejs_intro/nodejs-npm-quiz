@@ -1,0 +1,15 @@
+# Quiz using NodeJS and NPM
+
+-Who is author of file package for npm?
+=Run: npm search file and check AUTHOR column.
+
+-Install NodeJS file package with npm inside /home/thor/ directory.
+=Run: cd /home/thor/; npm install file to install NodeJS file package.
+
+-Install file module globally with npm.
+=Run: sudo npm install file -g to install file module globally.
+
+-Where did we install file package in previous step with global option?
+
+=Built-in modules are stored in /usr/lib/node_modules/npm/node_modules/
+External modules are stored in /usr/lib/node_modules on linux systems.
