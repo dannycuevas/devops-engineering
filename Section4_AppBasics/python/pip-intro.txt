@@ -1,0 +1,71 @@
+# PIP
+
+-PIP is the package manager for python, and when you install pythobm it also installs PIP automatically, and as discussed before, you can have 2 separate versions of python installed on the same host (for example, python2 and python3)
+
+-Check the version of your PIP, using capital "V" not "v"
+
+pip2 -V
+
+pip3 -V
+
+-To install a package using PIP, use "pip install" with the package name
+
+pip install PACKAGE
+pip install flask
+
+-When Python is installed, it creates its own directory for each version (example, Python3.6) under the path:
+
+/usr/lib/python3.6
+
+-So when you install a package, it installs it under /usr/lib/python* path, under the "site-packages" directory as each version has its own dedicated tree of directories including for the packages
+
+-To see the location of a particular package installed, with the package name
+
+pip show PACKAGE
+pip show flask
+
+
+### IMPORTING
+
+-Once installed, a package is "imported" into the code using the "import statement"
+-When a package is imported within an application, Python looks under a set of directories for the package
+
+from flask import Flask, request
+
+-And so to get a list of path that python looks for, you can print out the "sys.path" property, as this is the default location where python would look for packages
+
+python2 -c "import sys; print(sys.path)"
+
+
+# REQUIREMENTS
+
+-Large applications have many many different packages to be installed, so instead of running the "pip install" command multiple times, you can either run a single command with all the packages (packages names in it)
+
+pip install flask jinja2 markupsafe
+
+-Or a better approach would be to move all the package details (names) inside a file name "requirements.txt" and then run the "pip install" command using the -r option and the file name
+
+pip install -r requirements.txt
+
+-Also if you like, you can specify the packages versions in that file, example:
+
+Flask==0.10.1
+Jinja2==2.7.3
+MarkupSafe==0.23
+Werkzeug==0.9.6
+requests==2.3.0
+gunicorn==18.0
+
+
+# UPGRADE / UNINSTALL A PACKAGE
+
+-To upgrade a package, run
+
+pip install PACKAGE --upgrade
+
+-To uninstall a package, run
+
+pip uninstall PACKAGE
+pip uninstall gunicorn
+
+
