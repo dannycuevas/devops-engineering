@@ -30,7 +30,7 @@ run:
      [java] Hello Kodekloud
 
 -Install the maven build automation tool
-Run: "sudo yum install" -y maven to install maven
+Run: "sudo yum install -y maven" to install maven
 
 -We have downloaded an application named my-app to the directory - /opt/maven/. Please check /opt/maven/my-app/pom.xml on host01 server for maven. What is artifactId for main app when you build maven package?
 <groupId>com.mycompany.app</groupId>
