@@ -147,8 +147,6 @@ https://git-scm.com/docs/git-merge
 
 𝗴𝗶𝘁 𝗽𝘂𝘀𝗵 𝗼𝗿𝗶𝗴𝗶𝗻 <𝗯𝗿𝗮𝗻𝗰𝗵𝗻𝗮𝗺𝗲> : This command sends your commits to the remote repository.
 
-𝗴𝗶𝘁 𝗽𝘂𝗹𝗹 : If other people are also working on your project, you'll want to keep your local repo up-to-date with their changes. This command fetches and merges any changes from the remote repository.
-
 -Use Rebase to Pull from a newly connected remote repo into the local repo
 git pull --rebase
 git pull
@@ -165,10 +163,14 @@ git status -uno
 -The -uno option with git status displays the status without showing changes that are not staged.
 -After running these commands, you'll be able to see if the remote repository is ahead of your local repository and if there are changes you need to pull.
 
+𝗴𝗶𝘁 𝗽𝘂𝗹𝗹 : If other people are also working on your project, you'll want to keep your local repo up-to-date with their changes. This command fetches and merges any changes from the remote repository.
+
 # 𝗞𝗲𝘆 𝗗𝗶𝗳𝗳𝗲𝗿𝗲𝗻𝗰𝗲𝘀
 -Study well these commands, they may come in handy
 
 𝗴𝗶𝘁 𝗳𝗲𝘁𝗰𝗵 𝘃𝘀 𝗴𝗶𝘁 𝗽𝘂𝗹𝗹: Both download data from a remote repository. However, git fetch just downloads it without integrating it, while git pull also merges it into your local files.
+
+-So "git pull" is actually 2 commands in one, it is the combination of "git fetch" and "git merge".
 
 𝗴𝗶𝘁 𝗺𝗲𝗿𝗴𝗲 𝘃𝘀 𝗴𝗶𝘁 𝗿𝗲𝗯𝗮𝘀𝗲: Both incorporate changes from one branch to another. git merge combines the source and target branches via a new commit, whereas git rebase moves or combines commits to a new base, making a cleaner history.
 
@@ -220,9 +222,9 @@ index 2faf6fc..72a181e 100644
 --- a/characters.txt
 +++ b/characters.txt
 @@ -7,3 +7,4 @@ Extra characters
- -daniel
- -midori
- -bjork
+    -daniel
+    -midori
+    -bjork
 +-valkiria
 
 ### git diff HEAD
