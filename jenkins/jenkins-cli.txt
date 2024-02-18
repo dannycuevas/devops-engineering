@@ -1,0 +1,48 @@
+https://www.jenkins.io/doc/book/managing/cli/
+
+local jenkings cli access:
+http://localhost:8080/manage/cli/
+
+-Jenkins server is already installed and it's running on port 8085. You will find the jenkins-cli.jar file under /root on the Jenkins server, which you can use to interact with Jenkins over CLI.
+(this line of information may not be up to date anymore, as of february/18/2024)
+
+
+# Using the Jenkins CLI
+
+-Calling java, to call jenkins, to call the jenkins location, to call our authentication with the token AND then the jenkins commands, is how we run commands using the jenkins CLI
+
+You can use Jenkins CLI from the terminal using below given command:
+java -jar jenkins-cli.jar -s http://localhost:8085 -auth 'admin:Adm!n321' <command>
+
+java -jar jenkins-cli.jar -s http://localhost:8080/ -auth kalel:11998723b70e3b59f5c747ba798e475c2a
+
+java -jar jenkins-cli.jar -s http://localhost:8080/ -auth kalel:11998723b70e3b59f5c747ba798e475c2a list-plugins
+
+java -jar jenkins-cli.jar -s http://localhost:8080/ -auth kalel:11998723b70e3b59f5c747ba798e475c2a list-jobs
+
+### Commands Options Examples
+
+-Which of the following CLI options can we use to list all the installed plugins?
+list-plugins
+
+-Which of the following CLI options can we use to install a Jenkins plugin?
+install-plugin
+
+-Which of the following CLI options can we use to uninstall a Jenkins plugin?
+
+-Which of the following CLI options can we use to disable a Jenkins plugin?
+disable-plugin
+
+-Install the Bitbucket Branch Source plugin using the Jenkins CLI.
+
+=java -jar jenkins-cli.jar -s http://localhost:8085 -auth 'admin:Adm!n321' install-plugin cloudbees-bitbucket-branch-source
+sudo service jenkins restart
+
+-Upgrade the cloud-stats plugin to the latest available version using the Jenkins CLI.
+
+=java -jar jenkins-cli.jar -s http://localhost:8085 -auth 'admin:Adm!n321' install-plugin cloud-stats
+sudo service jenkins restart
+
+-Disable the github plugin using the Jenkins CLI.
+
+=java -jar jenkins-cli.jar -s http://localhost:8085 -auth 'admin:Adm!n321' disable-plugin github -restart -r
