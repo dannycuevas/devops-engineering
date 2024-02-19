@@ -2,10 +2,18 @@
 www.linkedin.com/in/daniel-cuevas-736bab177
 
 -Documenting my own DevOps journey, pursuing my passion, and my projects
--May this serve me as a guide throught my carreer, and maybe as a reference for others to learn more about this field
+
+-May these handy notes in all the different topics serve me as a guide throughtout my carreer, and maybe also as reference to others as well
+
+-If any doubts, just contact me via linkedin or here
+
+Cheers!
 
 
 ### Quick updates
 
-*February/16/2024
+*February//2024
 -I have attached cheat sheets for all of those GIT commands
+
+-Jenkins section added
+

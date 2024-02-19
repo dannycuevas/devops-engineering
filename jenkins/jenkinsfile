@@ -1,0 +1,28 @@
+// This will be a very straightforward example of a jenkins file
+
+pipeline {
+  agent any
+
+  stages {
+    stage('Dev') {
+      steps {
+        echo 'Hello world'
+      }
+    }
+  }
+}
+
+// Next example, for a build pipeline, but now it is taking code from a GitHub repository and it is building it for us inside of this pipeline
+
+pipeline {
+  agent any
+
+  stages {
+    stage('Build') {
+      steps {
+        // The GitHub repository linked here
+        git 'https://github.com/dannycuevas/go-webapp.git'
+      }
+    }
+  }
+}
