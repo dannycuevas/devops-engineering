@@ -1,0 +1,37 @@
+-When you run a container instance of ubuntu, it runs the instance and then it exits immediately, meaning it will not be running anymore if you inspect it
+
+-This is because unlike VMs, containers are NOT meant to host an operating system
+
+-Containers are MEANT to run specific tasks or process, such as to host an instance of a webserver or application server or a database, or simply to carry some kind of computation or analysis task
+
+-Once that "task" is completed, the container then exits (will stop running)
+
+-A container only LIVES as long as the process inside it is alive (running)
+
+-If the image is not running any service, lets say just an OS container, for example a container running just ubuntu, you can tell Docker to run a process inside it when using the "Docker run command"
+
+For example, a "sleep" command with a duration of 5 seconds
+
+docker run ubuntu COMMAND
+docker run ubuntu sleep 5
+
+When the container starts, it runs the sleep command and goes into sleep for 5 seconds, post which the sleep command exits, and the container stops
+
+-What if we want to execute a command inside of a already running container?
+We use the "docker exec" command to execute a command inside of a running container
+
+docker exec CONTAINER-NAME COMMAND
+docker exec magic_island cat /etc/hosts
+
+-Run a container in the "detached mode", which is like starting a container but in the background putting us back into our own prompt again, so we do not stay attached to the output of a newly run container, for this we use the -d option, and the container will continue to run in the backend
+
+docker run -d CONTAINER-IMAGE
+docker run -d kodekloud/simple-webapp
+docker run -d centos sleep 100
+
+-To go back to a running container, to be "attachec back" to a running container that is running in the background, we do it by calling the container name or container ID
+
+docker attach CONTAINER-ID
+docker attach CONTAINER-NAME
+docker attach a382d
+docker attach jumpy_horse
