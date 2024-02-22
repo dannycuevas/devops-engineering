@@ -1,0 +1,113 @@
+# DOCKER ENGINE
+
+-As be have mentioned before, the Docker Engine is simply referred to as the HOST with the Docker installed on it
+
+-When you are installing Docker on a Linux machine, you are installing 3 different components:
+
+    -Docker Deamon
+    -REST API Server
+    -Docker CLI
+
+### Docker Daemo
+-Is the background process that manages Docker objects such as the images, containers, volumes, and networks
+
+### REST API Server
+-Is the API interface that programs can use to talk to the daemon and provide instructions
+-You can actually create your own tools using this REST API
+
+### Docker CLI
+-This is nothing but the command line interface that we have been using all along to perform all our actions using the docker commands
+-It uses the REST API to communicate with the Docker Daemon
+
+-Note, the Docker CLI need not necessarily be on the same host, it could be on another system like a laptop, and can still work with a remote docker engine
+-For this, simply use the -H option on your docker command and specify the remote Docker Engine address and a port, example:
+
+docker -H=remote-docker-engine:2375
+
+docker -H=10.123.2.1:2375 run nginx
+
+
+# CONTAINERIZATION
+
+-Now let's try and understand how exactly our applications is containerized in Docker, how does it all work under the hood?
+
+-Docker uses "namespaces" to isolate
+workspace
+process IDs
+networking
+inter-process communication
+mounts
+and unix timesharing systems
+
+They are all created in their OWN namespace, thereby providing isolation between all of the containers
+
+
+### ProcessID namespaces
+-Whenever a Linux system boots up, it starts with just one process with a processID of 1
+-ProcessID number 1 is the "root process" and kicks off all the other processes in the system
+
+-By the time the system boots up completely, we have a handful of processes running, and this can be seen by running the PS command to list all of the running processes
+
+ps
+
+-ProcessID are UNIQUE, and 2 processes can NOT have the same processID
+
+-Now, if we were to create a Container, which is basically like a child system WITHIN the current system, then the child system needs to think that it is an "independent system" on its own, and that "it has" its own set of processes originating from a root process with a ProcessID of 1
+
+-But we know that there is no hard isolation between the Container and the underlying Host, so the processes running INSIDE the container are in fact processes running on the underlying HOST...
+
+And so, 2 processes cannot have the same processID of "1"
+
+This is where NAMESPACES come into play
+
+-With ProcessID Namespaces, each process can have multiple processIDs associated with it
+
+-For example, when the processes start in the Container, it is actually just another set of processes on the based LINUX system, and it gets the "next available" processID (1,2,3,4,5,6,7,8,9,etc...)
+
+However, they also get another processID associated with them, starting with ID "1" in the container namespace, which is only VISIBLE inside the container
+
+-So at this point, the Container thinks that it has its own "root process" tree, and becasue of this, it also thinks of itself as an "independent system" as well
+
+
+### Identifying Processes
+-So how does that relates to an actual system?
+How do you see this on a HOST?
+
+-Lets say we run an Nginx container, and we know the container will run an Nginx service
+
+IF we were to list all the services inside the Docker container, we will see the Nginx process running with a processID of "1"
+That would be the processID of the service INSIDE of the container Namespace
+
+-If we list the services on the Docker HOST, we will see the same service, that Nginx service, but with a DIFFERENT processID
+
+-That indicates that ALL processes are in fact RUNNING on the same HOST, but "separated" into their own containers, so "separated" into their own "spaces", meaning, containers using "namespaces"
+
+
+-This tells us that, the underlying Docker HOST, as well as the containers, are SHARING the same "system resources", such as CPU and memory
+
+
+# CGROUPS
+
+-So, now that we know that the underlying Docker HOST, as well as the containers, are SHARING the same "system resources", such as CPU and memory, this begs other questions
+
+-How much of the resouces are dedicated to the host and to the containers?
+How does Docker manage and share the resources between its containers?
+
+-By default, there is "no restriction" as to how much of a resource a container can use, and hence, a container, at any time, may end up utilizing all of the resources on the underlying HOST
+
+-But, there is a way to restrict the amount of CPU or memory that the containers can use
+
+Docker uses "CGROUPS" or "Control Groups" to restrict the amount of hardware resources allocated to each container
+
+-This can be done by providing the --cpu option to the docker run command, example:
+
+docker run --cpus=.5 ubuntu
+
+Providing a value of ".5" will ensure that the container does not take up more that 50% of the HOST cpu at any given time
+
+Same goes with memory allocation
+
+docker run --memory=100m ubuntu
+
+Setting a value of "100m" limits the amount of memory the container can use, up to 100 megabytes
+

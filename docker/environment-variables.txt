@@ -1,0 +1,47 @@
+-Lets say for example that your DOCKERFILE has a webapp with a variable written inside it named:
+
+color = "red"
+
+But, it is best practice to move such information out of the application code and into, lets say, an "environment variable" called "app color"
+
+Which will look like this:
+
+color = os.environ.get('APP_COLOR')
+
+-The next time you run the application, set an "environment variable" just called "APP_COLOR" to your desired value, and now the application has a new color
+
+export APP_COLOR=blue; python app.py
+
+-Once your application geta packaged into a Docker Image, you will then run it with the Docker run command, followed by the name of the image
+
+docker run simple-webapp-color
+
+-However, if you wish to pass the environment variable as we did before, you would now use the docker run -e option to set an "environment variable" WITHIN the container
+
+docker run -e APP_COLOR=blue simple-webapp-color
+
+-To deploy multiple containers with different colors, you would run the docker command multiple times, and set a different value (as neccessary) for the "environment variable" EACH time
+
+docker run -e APP_COLOR=green simple-webapp-color
+docker run -e APP_COLOR=pink simple-webapp-color
+
+
+-How do you find the environment varible set on a container that is already running?
+Use the docker inspect command to inspect the properties of a running container
+
+docker inspect CONTAINER-NAME
+
+And search for the "environment" key, under the "CONFIG" section of the file, which should be under "ID", "State", "Mounts"
+
+
+### QUIZ ###
+
+-Run a container named blue-app using image kodekloud/simple-webapp and set the environment variable APP_COLOR to blue. Make the application available on port 38282 on the host. The application listens on port 8080.
+
+docker run -p 38282:8080 --name blue-app -e APP_COLOR=blue -d kodekloud/simple-webapp
+
+-Deploy a mysql database using the mysql image and name it mysql-db.
+Set the database password to use db_pass123. Lookup the mysql image on Docker Hub and identify the correct environment variable to use for setting the root password.
+
+docker run -e MYSQL_ROOT_PASSWORD=db_pass123 --name mysql-db -d mysql
+
