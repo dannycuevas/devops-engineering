@@ -1,0 +1,62 @@
+
+# PODS CONCEPTS
+
+### Introduction
+-As we have discussed before, when using Kubernetes, our ULTIMATE goal is to deploy our application in the form of Containers, on a SET of Systems/Machines/Nodes, that would be configured as Worker Nodes in the cluster
+
+-However, Kubernetes does not deploy containers directly onto the Worker Nodes;
+
+The containers are encapsulated into a Kubernetes object known as PODs
+
+-A POD is a single instance of an application
+
+A pod is the smallest object that you can create in Kubernetes
+
+-So it goes like this:
+
+    -Kubernetes Cluster >
+    -Node               >
+    -POD                >
+    -Containers
+
+### SCALING THE PODS
+-So what if the number of users increase and you need to scale your application?
+You will need to add additional instances of your web application to SHARE the load
+
+-Where would you spin up additional instances?
+
+We just create a new POD inside the worker node, with a new instance/container of the SAME application
+
+So we now have 2 instances/containers of the web application running on TWO separate PATHS, in the same system/node
+
+-What if the traffic increases and your current NODE has no sufficient capacity?
+
+Well, you can always deploy additional PODS on new NODES in your cluster
+
+So you can add new NODES added to the cluster, to expand the cluster PHYSICAL capacity
+
+### PODS NOTES
+-PODS usually have a 1 : 1 relationship to containers
+1 pod holds 1 container
+
+-To SCALE UP you create new pods
+-To SCALE DOWN you delete existing pods
+
+-You do not add additional containers to existing PODS
+
+### Multi-Container PODS
+-A single pod can, in fact, have multiple containers, except for the fact they are ususally not multiple containers of the same kind
+
+-But sometimes you might have a scenario where you have a HELPER container,
+and these might be doing some kind of supporing task for our web application,
+such as processing a user, enter data, processing a file uploaded by the user, etc
+
+And you want these HELPER containers to live alongside your application container
+
+-In that case, you can have both of these containers as part of the SAME POD,
+so that when a new application container is created, the helper is also created,
+and when it diesm the helper also dies since they SHARE the same POD
+
+-The 2 containers inside the SAME POD can also communicate with each other directly by referring to each other as LOCAL HOST, since they share the same network space
+
+Plus, they can easily share the same STORAGE space as well
