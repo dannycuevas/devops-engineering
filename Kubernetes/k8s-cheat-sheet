@@ -13,25 +13,39 @@ kubectl get pods,svc
 minikube service SERVICE-NAME --url
 minikube service voting-service --url
 
+-Edit a current running object, like a pod, to change its properties/settings in real time,
+this allows NOT having to re-run the creation of an object
+
+kubectl edit pod PODNAME
+kubectl edit pod redis
+
+-Update an object once you have modified its YAML configuration file
+this allows not having to delete and re-create the object from a YAML configuration file
+
+kubectl apply -f FILENAME.yaml
+kubectl apply -f redis-definition.yaml
+
 
 
 # POD COMMANDS
 
 -Creating a new pod with a new container of an application, using the specific image name
+Image will be downloaded from your configured repository
+
 kubectl run PODNAME --image IMAGE
 kubectl run nginx --image nginx
+kubectl run nginx --image=nginx
 
--Listing pods in our cluster
+-Listing pods available in our cluster
 kubectl get pods
 
 -Showing basic internal information of pods, like for example
-listing on which nodes are all the pods
-or showing the pods IPs
+listing on which nodes are all the pods, or showing the podsinternal IPs address
 
 kubectl get pods -o wide
 
 -Get more information regarding an specific pod, including showing what pod it belongs to,
-the pods IP address
+the pods internal IP address
 the pod status
 the pod IP address
 the Image name used for the container
@@ -39,6 +53,10 @@ the container inside this pod
 
 kubectl describe pod PODNAME
 kubectl describe pod nginx
+
+Node:             minikube/192.168.49.2 ===> on what node this is running and the node IP address
+Start Time:       Sat, 24 Feb 2024 01:47:32 -0600 ===> when the pod was started
+IP:               10.244.0.8 ===> pod IP address
 
 -Delete a single pod
 kubectl get pods
@@ -57,6 +75,7 @@ the desired number of replicas or how many of them are ready
 kubectl get replicationcontroller
 
 -To see the list of created ReplicaSets
+
 kubectl get replicaset
 kubectl get rs
 
@@ -65,7 +84,7 @@ kubectl get rs
 kubectl delete replicaset REPLICA-NAME
 kubectl delete rs REPLICA-NAME
 
--To replace or update the ReplicaSet
+-To replace with an updated version the ReplicaSet
 kubectl replace -f REPLICA-FILE.yaml
 
 -Scale replica set from the command line without having to modify the yaml file
@@ -110,3 +129,11 @@ kubectl config set-context $(kubectl config current-context) --namespace=NEW-SPA
 
 -To view pods in all namespaces
 kubectl get pods --all-namespaces
+
+
+
+# YAML FILES
+
+-Create a new object from your YAML file once the file is ready,
+using the -f for the filename
+kubectl create -f pod-definition.yaml
