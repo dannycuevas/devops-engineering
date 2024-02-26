@@ -27,6 +27,14 @@ kubectl apply -f redis-definition.yaml
 
 
 
+# YAML FILES
+
+-Create a new object from your YAML file once the file is ready,
+using the -f for the filename
+kubectl create -f pod-definition.yaml
+
+
+
 # POD COMMANDS
 
 -Creating a new pod with a new container of an application, using the specific image name
@@ -87,9 +95,6 @@ kubectl delete rs REPLICA-NAME
 -To replace with an updated version the ReplicaSet
 kubectl replace -f REPLICA-FILE.yaml
 
--Scale replica set from the command line without having to modify the yaml file
-kubectl scale --replicas=6 -f REPLICA-FILE.yaml
-
 -Scale a ReplicaSet that is already running without modifying the yaml file
 kubectl scale rs REPLICA-NAME --replicas=NUMBER
 
@@ -99,6 +104,7 @@ kubectl describe replicaset myapp-replicaset
 
 -Edit your ReplicaSet, but only the version in memory and not the actual yaml file,
 for example to edit the number of replicas, this will not end up changing your yaml file at all
+
 kubectl edit replicaset REPLICA-NAME
 kubectl edit replicaset myapp-replicaset
 
@@ -108,6 +114,69 @@ why do you think the PODs are not ready?
 =Run the command: kubectl describe pods and look at under the Events section.
 or
 kubectl describe pods | grep Error
+
+
+
+# DEPLOYMENT COMMANDS
+
+-List all your current Deployments
+kubectl get deployments
+
+-Get detailed internal information on a specific Deployment,
+this would even include the deployment strategy and its update events at the bottom
+
+kubectl describe deployment DEPLOYMENT
+kubectl describe deployment frontend-deployment
+
+-When the pods in the Deployment are not ready, why do you think the deployment is not ready?
+=Run the command: kubectl describe pods POD-NAME and look under the Events section.
+kubectl describe pods POD-NAME
+
+### Example Deployment File
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-deployment
+spec:
+  replicas: 6
+  selector:
+    matchLabels:
+      name: myapp
+  template:
+    metadata:
+	  name: nginx-2
+      labels:
+        app: myapp
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+		
+
+-To check the status of your Rollout
+kubectl rollout status deployment DEPLOYMENT-NAME
+kubectl rollout status deploy myapp-deployment
+
+-To see the Revisions and history of the Rollout
+kubectl rollout history deploy DEPLOYMENT-NAME
+
+-To revert updates-upgrades of a Deployment to the previous version
+kubectl rollout undo DEPLOYMENT-NAME
+
+-Make changes (in memory) to a running Deployment, and also keep it as a "record" for the "revision" versions of the deployment
+kubectl edit deployment DEPLOYMENT-NAME --record
+kubectl edit deploy myapp-deployment --record
+
+-Find out the container name, run the command and look for the value "Containers:",
+there you will see the name as the value just below it
+
+kubectl describe deploy DEPLOYMENT-NAME
+kubectl describe deploy myapp-deployment
+
+-Change the image used in a deployment in a simple way, without modifying the yaml file, in a single command
+kubectl set image deploy DEPLOYMENT CONTAINER=NEW-IMAGE
+kubectl set image deploy myapp-deployment simple-app=kodekloud/webapp-color:v2
 
 
 
@@ -132,9 +201,3 @@ kubectl config set-context $(kubectl config current-context) --namespace=NEW-SPA
 kubectl get pods --all-namespaces
 
 
-
-# YAML FILES
-
--Create a new object from your YAML file once the file is ready,
-using the -f for the filename
-kubectl create -f pod-definition.yaml

@@ -5,7 +5,9 @@ www.linkedin.com/in/daniel-cuevas-736bab177
 
 - May these handy notes in all the different topics serve me as a guide throughtout my carreer, and maybe also as reference to others as well
 
-- If any doubts, or just want to collaborate with me, just contact me via linkedin, or here
+- If any doubts, or just want to collaborate with me, just contact me via linkedin or here, it would be nice to see this project grow and help many more people
+
+- So... ALL COLLABORATION IS WELCOME (: 
 
 Cheers!
 
@@ -20,4 +22,7 @@ Cheers!
 -Jenkins section added and completed
 
 -Docker section added and completed
+
+-Kubernetes section started
+
 
