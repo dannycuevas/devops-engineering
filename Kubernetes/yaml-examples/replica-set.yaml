@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: myapp1-replica
+  labels:
+   app: myapp1
+
+spec:
+  selector:
+    matchLabels:
+      envi: chaosdev
+
+  replicas: 4
+  template:
+    metadata:
+      name: nginx-2
+      labels:
+          envi: chaosdev
+    spec:
+        containers:
+            - name: nginx-version2
+              image: nginx 

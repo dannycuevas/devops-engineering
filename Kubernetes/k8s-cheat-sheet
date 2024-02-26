@@ -104,6 +104,7 @@ kubectl edit replicaset myapp-replicaset
 
 -While checking a ReplicaSet, we have 0 READY pods,
 why do you think the PODs are not ready?
+
 =Run the command: kubectl describe pods and look at under the Events section.
 or
 kubectl describe pods | grep Error

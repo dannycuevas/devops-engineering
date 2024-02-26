@@ -126,3 +126,16 @@ kubectl scale --replicas=6 replicaset myapp-repli
 
 -However, keep in mind that using the scale command will not result in the number of replicas being udpated in the actual replica set definition file, that will remain the same, unless changed manually
 
+### Scale Down
+-If you happen to create more PODs, for example using PODs definition files,
+using the same label as your ReplicaSet definition (so they can get "monitored" too),
+
+Then the replica set will automatically scale down or delete the number of pods that exceed the maximum number of replicas
+
+-This is because even though you are creating more pods in a different manner,
+since you are using the same label as your replica set, as if telling it that the new pod belongs to the same replica set
+
+The replica set still understands that there is a maximum numbers of replicas to be hold at all times,
+no matter how many pods you create (given you are using the same replica set label)
+
+
