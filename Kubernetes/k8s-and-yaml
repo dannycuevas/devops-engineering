@@ -60,6 +60,11 @@ This means, this will always be different for different objects
 
 -"spec" is a dictionary, and can contain lists or arrays
 
+-Order of values inside SPEC for easier readability:
+        -selector > matchLabel
+        -replicas
+        -template > metadata / spec
+
 
 
 # YAML FILE CREATION

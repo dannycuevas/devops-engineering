@@ -111,26 +111,34 @@ kubectl edit replicaset myapp-replicaset
 -While checking a ReplicaSet, we have 0 READY pods,
 why do you think the PODs are not ready?
 
-=Run the command: kubectl describe pods and look at under the Events section.
+=Run the command:
+"kubectl describe pods" and look at under the Events section.
 or
-kubectl describe pods | grep Error
+kubectl describe pods PODS-NAME | grep Error
 
 
 
 # DEPLOYMENT COMMANDS
 
--List all your current Deployments
-kubectl get deployments
+-Create your new Deployment using a YAML configuration file
+kubectl create -f deployment-file.yaml
 
--Get detailed internal information on a specific Deployment,
+-List all your current Deployments
+
+kubectl get deployments
+kubectl get deployments -o wide
+
+-Get "detailed internal" information on a specific Deployment,
 this would even include the deployment strategy and its update events at the bottom
 
 kubectl describe deployment DEPLOYMENT
 kubectl describe deployment frontend-deployment
 
 -When the pods in the Deployment are not ready, why do you think the deployment is not ready?
-=Run the command: kubectl describe pods POD-NAME and look under the Events section.
+
+=Run the command: "kubectl describe pods POD-NAME" and look under the Events section.
 kubectl describe pods POD-NAME
+kubectl describe pods PODS-NAME | grep Error
 
 ### Example Deployment File
 
@@ -154,6 +162,11 @@ spec:
         image: nginx
 		
 
+-Applying all changes made to the deployment definition file once it is saved
+
+kubectl apply -f FILENAME.yaml
+kubectl apply -f deployment.yaml
+
 -To check the status of your Rollout
 kubectl rollout status deployment DEPLOYMENT-NAME
 kubectl rollout status deploy myapp-deployment
@@ -161,7 +174,9 @@ kubectl rollout status deploy myapp-deployment
 -To see the Revisions and history of the Rollout
 kubectl rollout history deploy DEPLOYMENT-NAME
 
--To revert updates-upgrades of a Deployment to the previous version
+-To revert updates-upgrades of a Deployment to the previous version,
+to rollback a deployment update
+
 kubectl rollout undo DEPLOYMENT-NAME
 
 -Make changes (in memory) to a running Deployment, and also keep it as a "record" for the "revision" versions of the deployment
