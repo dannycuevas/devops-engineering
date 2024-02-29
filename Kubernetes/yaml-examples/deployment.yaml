@@ -1,19 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: app-deployment
+    name: app-deploy
     labels:
       tier: front-end
       app: nginx
+      type: deploy-type
 
 spec:
     selector:
       matchLabels:
         app: app-deployment
-    replicas: 5
+    replicas: 6
     template:
       metadata:
-        name: app-pod
+        name: pod-nginx
         labels:
           app: app-deployment
           tier: front-end

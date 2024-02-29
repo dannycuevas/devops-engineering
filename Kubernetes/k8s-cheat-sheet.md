@@ -33,6 +33,12 @@ kubectl apply -f redis-definition.yaml
 using the -f for the filename
 kubectl create -f pod-definition.yaml
 
+-Edit your current running object, in its own YAML file, like a deployment for example,
+and use the "--record" option save the "change" in its own YAML file as well
+
+kubectl edit deploy DEPLOYMENT --record
+kubectl edit deploy app-deploy --record
+
 
 
 # POD COMMANDS
@@ -167,17 +173,22 @@ spec:
 kubectl apply -f FILENAME.yaml
 kubectl apply -f deployment.yaml
 
--To check the status of your Rollout
+-To check the status of your Rollout-Deployment
+This will show you your pods being deployed one by one
+
 kubectl rollout status deployment DEPLOYMENT-NAME
 kubectl rollout status deploy myapp-deployment
 
--To see the Revisions and history of the Rollout
+-To see the Revisions and history of the Rollout-Deployment
+
 kubectl rollout history deploy DEPLOYMENT-NAME
+kubectl rollout history deploy app-deploy
 
--To revert updates-upgrades of a Deployment to the previous version,
-to rollback a deployment update
+Edit a current running deployment, like doing an "update" for example,
+and use the "--record" option save the "change" in its own YAML file as well
 
-kubectl rollout undo DEPLOYMENT-NAME
+kubectl edit deploy DEPLOYMENT --record
+kubectl edit deploy app-deploy --record
 
 -Make changes (in memory) to a running Deployment, and also keep it as a "record" for the "revision" versions of the deployment
 kubectl edit deployment DEPLOYMENT-NAME --record
@@ -190,8 +201,15 @@ kubectl describe deploy DEPLOYMENT-NAME
 kubectl describe deploy myapp-deployment
 
 -Change the image used in a deployment in a simple way, without modifying the yaml file, in a single command
-kubectl set image deploy DEPLOYMENT CONTAINER=NEW-IMAGE
+
+kubectl set image deploy DEPLOYMENT CONTAINER-NAME = IMAGE-VERSION
 kubectl set image deploy myapp-deployment simple-app=kodekloud/webapp-color:v2
+kubectl set image deploy app-deploy nginx-container=nginx:1.18 --record
+
+-To revert updates-upgrades of a Deployment to the previous version,
+to a previous revision, to rollback a deployment update
+
+kubectl rollout undo DEPLOYMENT-NAME
 
 
 
