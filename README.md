@@ -3,14 +3,16 @@ www.linkedin.com/in/daniel-cuevas-736bab177
 
 - Documenting my own DevOps journey, pursuing my passion, and my projects
 
-- May these handy notes in all the different topics serve me as a guide throughtout my carreer, and maybe also as reference to others as well
-
-- If any doubts, or just want to collaborate with me, just contact me via linkedin or here, it would be nice to see this project grow and help many more people
+- If any doubts, or just want to collaborate with me, just contact me via
+linkedin or here, it would be nice to see this project grow and reach out and
+help as many people as possible (: 
 
 - So... ALL COLLABORATION IS WELCOME (: 
 
 Cheers!
 
+
+PS: Every single note here was hand written by me so far, following videos projects or courses, no copy paste from other text sources.
 
 
 ---

@@ -234,3 +234,21 @@ kubectl config set-context $(kubectl config current-context) --namespace=NEW-SPA
 kubectl get pods --all-namespaces
 
 
+
+# SERVICES COMMANDS
+
+-Create a new service, using its definition file
+
+kubectl create -f SERVICE-FILE.YAML
+kubectl create -f service-nodeport.yaml
+
+-List your created and running services, and see their information such as:
+name, type, IP address, ports, etc
+
+kubectl get services
+
+-If running Minikube, you can print out the URL of a Service, so you can access
+the application, using the --url option
+
+minikube service SERVICE-NAME --url
+
