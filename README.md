@@ -12,7 +12,7 @@ help people get into the realm of DevOps (:
 See you in the grid!
 
 
-PS: Every single note here was "hand written" (typed in lol) by me so far,
+PS: Every single note here was "hand written" (typed-in lol) by me so far,
 following videos, projects, or courses, no copy paste from other text sources.
 
 
