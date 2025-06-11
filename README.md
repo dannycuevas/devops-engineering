@@ -39,3 +39,9 @@ following videos, projects, or courses, no copy paste from other text sources.
 
 -Microservices section started
 
+
+*June//2025
+
+-On June 8, Cristiano Ronaldo is European champion at 40 years of age
+
+-Restructured the Kubernetes cheatsheet files
