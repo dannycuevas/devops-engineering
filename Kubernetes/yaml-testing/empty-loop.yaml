@@ -1,0 +1,29 @@
+# This will just generate an empty loop, to spike the CPU usage, for monitoring and testing purposes for example
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: empty-loop
+  namespace: default
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: empty-loop
+  template:
+    metadata:
+      labels:
+        app: empty-loop
+    spec:
+      containers:
+      - args:
+        - -c
+        - while true; do true; done
+        command:
+        - /bin/bash
+        image: ubuntu
+        name: empty-loop-container
+        resources:
+          requests:
+            cpu: "0.5"
+            memory: 100Mi
