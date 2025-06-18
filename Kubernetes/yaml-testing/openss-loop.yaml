@@ -1,0 +1,28 @@
+# This is a deployment that will run "openssl speed" in a loop, and thus it will generate some high CPU usage (for monitoring testing for example)
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: openssl-loop
+  namespace: default
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: openssl-loop
+  template:
+    metadata:
+      labels:
+        app: openssl-loop
+    spec:
+      containers:
+      - args:
+        - |
+          while true; do
+            openssl speed >/dev/null;
+          done
+        command:
+        - /bin/bash
+        - -c
+        image: polinux/stress
+        name: openssl-loop
