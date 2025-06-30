@@ -1,0 +1,22 @@
+# This is a Persistant Volume Claim for AKS
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: azure-managed-disk
+spec:
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: managed-csi
+  resources:
+    requests:
+      storage: 5Gi
+
+# Thus, it will just need to be "claimed" by a deployment,
+# at the very last bracket "volumes" in the deployment yaml file
+# Example:
+#
+# volumes:
+# - name: volume
+# persistentVolumeClaim:
+#   claimName: azure-managed-disk
