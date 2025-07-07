@@ -1,3 +1,12 @@
+# Kubectl Commands
+
+-Complete Kubernetes reference guide
+https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands
+
+- Get your AKS cluster credentials
+```
+az aks get-credentials -g <RG-NAME> -n <AKS-NAME>
+```
 
 - Install Kubernetes with kubeadm, we're going to specify the pod-network-cidr to use the subnet range of 10.10.0.1/16 and we're going to be implicit about the kubernetes version installed
 ```
@@ -44,9 +53,29 @@ kubectl proxy
 curl -sSL "http://localhost:8001/api/v1/nodes/<NODE-NAME>/proxy/configz" | grep -i kubeReserved
 ```
 
+
+# Kubeconfig
+
 - See how to use the `kubeconfig` commands
 ```
 kubectl config -h
+```
+
+- To make `kubelogin` work, if you're using this on a new machine or script, always do:
+```
+az login
+az aks get-credentials -g <RG-NAME> -n <AKS-NAME>
+kubelogin convert-kubeconfig -l azurecli
+```
+
+- Managing multiple clusters:
+- You **do need to run the other two commands (`get-credentials` + `kubelogin`) for each AKS cluster** you want to manage
+	- So for `az aks get credentials` you **must run this for each new AKS cluster** you want to access
+	- And for `kubelogin convert-kubeconfig` you’ll typically run this **once after adding your clusters**, and it will update all AAD-enabled entries in your kubeconfig, but if you add a new cluster later, run it again to update the config
+```
+az login
+az aks get-credentials -g <RG-NAME> -n <AKS-NAME>
+kubelogin convert-kubeconfig -l azurecli
 ```
 
 - Display your current `kubeconfig` context
@@ -59,13 +88,10 @@ kubectl config current-context
 kubectl config get-contexts
 ```
 
-- Switch to a different context using the context name
+- Switch to a different context using the context name, by using the `NAME` column names
 ```
 kubectl config use-context CONTEXT-NAME
 ```
-
-#### Kubernetes - Scale command documentation
-https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#scale
 
 
 # AKS & Cluster Nodes
@@ -141,8 +167,30 @@ ls -l
 openssl x509 -in CERT-NAME.crt -noout -enddate
 ```
 
+- Check the AKS supported version for a specific region
+```
+az aks get-versions -l REGION-NAME -o table
+az aks get-versions -l westeurope -o table
+```
+
+- Check the available upgrades for a specific AKS cluster
+```
+az aks get-upgrades -g <AKS-RG> -n <AKS-NAME> -o table
+```
+
 
 # Pods
+
+- Remote into a Pod
+```shell
+kubecelt exec -it <POD-NAME> -- sh
+```
+
+- Run a command inside a Pod, without having to remote in
+	- In this example, we want to see the storage space and capacity of a specific directory
+```shell
+kubectl exec -it <POD-NAME> -- df -h /mnt/azuredisk #> filepath
+```
 
 - List all your running Pods with all their details
 ```
@@ -298,9 +346,14 @@ kubectl describe deploy/nginx
 
 # Services
 
-- Let's create a `clusterIP` for our deployment, as we specified a port when creating the deployment, we can use the expose command with kubectl to expose this as a service
+- Let's create a `clusterIP` for our deployment, as we specified a port when creating the deployment, we can use the expose command, to expose this as a service
 ```
 kubectl expose deployment/nginx --type=ClusterIP
+```
+
+- Expose a deployment with a Service-type Load Balancer, on port 80, and this will be using a public IP address
+```
+kubectl expose deploy <deploy-name> --port 80 --name <expose-service-name> --type LoadBalancer
 ```
 
 - List all the available services
@@ -427,6 +480,39 @@ kubectl get cm -A
 kubectl get cm -n <NAMESPACE> <CM-NAME> -o yaml
 ```
 
+- Example copy command to move a file from inside a Node, to your computer for analysis, for example `tcpdump` command
+```
+kubectl cp [namespace]/[pod-name]:/path/of/file/file-name.cap /local-path/destination/file-name.cap
+```
+
+```
+kubectl cp nsenter-94dshf:/root/capture.cap capture.cap
+```
+
+
+# Storage
+
+- List your Storage Classes
+```
+kubectl get sc
+```
+
+```
+kubectl get sc managed-csi
+```
+
+- List your Storage Classes in your cluster
+	- This can be useful if you want to see if you have "allowed expansion" of Volumes
+```
+kubectl get sc
+```
+
+- List your Persistent Volumes and Persistent Volume Claims
+	- This will display information such as size (in GB)  
+```
+kubectl get pv,pvc
+```
+
 
 # crictl CLI
 
@@ -449,3 +535,4 @@ crictl ps
 ```
 crictl logs CONTAINER-ID
 ```
+
