@@ -343,6 +343,13 @@ kubectl describe deploy/<deploy-name>
 kubectl describe deploy/nginx
 ```
 
+- Restart all the pods (the whole deployment) in a Deployment
+```
+kubectl rollout restart deployment/<deploy-name>
+
+kubectl rollout restart deployment/my-app
+```
+
 
 # Services
 
@@ -535,4 +542,3 @@ crictl ps
 ```
 crictl logs CONTAINER-ID
 ```
-
