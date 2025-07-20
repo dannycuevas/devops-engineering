@@ -1,4 +1,4 @@
-# Kubectl Commands
+# KUBERNETES CHEATSHEET
 
 -Complete Kubernetes reference guide
 https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands
@@ -65,6 +65,9 @@ kubectl config -h
 ```
 az login
 az aks get-credentials -g <RG-NAME> -n <AKS-NAME>
+```
+and then
+```
 kubelogin convert-kubeconfig -l azurecli
 ```
 
@@ -180,6 +183,14 @@ az aks get-upgrades -g <AKS-RG> -n <AKS-NAME> -o table
 
 
 # Pods
+Pods will be named exactly the same as its "Deployment"
+
+- List all the Pods that belong to a specific Deployment
+```
+kubectl -n <namespace> get pods | grep <deploy-name>
+
+kubectl -n <namespace> get pods | rpg <deploy-name>
+```
 
 - Remote into a Pod
 ```shell
@@ -276,6 +287,42 @@ kubectl get pod --show-labels
 	- first call the Pod name, and then the actual "label and value"
 ```
 kubectl label pod <POD-NAME> NEW-LABEL=NEW-VALUE
+```
+
+# CONTAINERS
+
+- Get the logs from a specific Container from a Pod that belongs to a Deployment
+	- and then get those logs to a file, but only the last 500 lines
+	- this will fan-out all the matching Pods from that Deployment
+	- if there is more than 1 Pod, it concatenates their logs
+```
+kubectl logs deployments/<deploy-name> -c <container-name>
+
+kubectl logs deployments/<deploy-name> -c <container-name> --tail=500 > container-name.logs
+```
+
+- Get the logs from a specific Container, inside a specific Pod
+```
+kubectl logs <pod-name> -c <container-name>
+```
+
+- Check if all the Containers inside the Pods of a specific Deployment are actually running
+	- this uses the actual Deployment label
+	- you get the Label from `describe` command against the Deployment
+```
+kubectl -n <namespace> get pods -l app=<deploy-label>
+```
+
+- Check if the Containers inside a specific Pod are running by looking at the Pod `describe` information
+	- you will find the actual Containers under the `Init Containers:` and `Containers:` "brackets"
+```
+kubectl describe pod <pod-name> -n <namespace>
+```
+
+- See the running containers by name in a simple output, in a single command by using the Pod name and Namespace
+```
+kubectl get pod <pod-name> -n <namespace> \
+-o jsonpath='{.spec.containers[*].name}'
 ```
 
 
@@ -494,6 +541,11 @@ kubectl cp [namespace]/[pod-name]:/path/of/file/file-name.cap /local-path/destin
 
 ```
 kubectl cp nsenter-94dshf:/root/capture.cap capture.cap
+```
+
+- Send Logs from an object to a file, from the last 1 hour, but no more than 500 lines
+```
+kubectl logs deployments/<deploy-name> --since=1h --tail=500 > my-data.logs
 ```
 
 
