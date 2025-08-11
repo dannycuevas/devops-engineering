@@ -1,4 +1,5 @@
-# KUBERNETES CHEATSHEET
+# KUBERNETES COMMANDS
+
 
 -Complete Kubernetes reference guide
 https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands
@@ -195,6 +196,17 @@ kubectl -n <namespace> get pods | rpg <deploy-name>
 - Remote into a Pod
 ```shell
 kubecelt exec -it <POD-NAME> -- sh
+```
+
+- Get the logs for a specific Pod
+```
+kube -n NAMESPACE logs CONTAINER-NAME-0000
+```
+
+- Search for a specific Pod, an "nginx" Pod for testing for example, and then remote into it
+```
+kube get pods -A | rpg nginx
+kube -n NAMESPACE exec -it PODNAME -- sh
 ```
 
 - Run a command inside a Pod, without having to remote in
@@ -395,6 +407,8 @@ kubectl describe deploy/nginx
 kubectl rollout restart deployment/<deploy-name>
 
 kubectl rollout restart deployment/my-app
+
+kubectl rollout restart deploy <dpname> -n <namespace>
 ```
 
 
@@ -546,6 +560,22 @@ kubectl cp nsenter-94dshf:/root/capture.cap capture.cap
 - Send Logs from an object to a file, from the last 1 hour, but no more than 500 lines
 ```
 kubectl logs deployments/<deploy-name> --since=1h --tail=500 > my-data.logs
+```
+
+- List all service accounts in a cluster
+```
+kubectl get serviceaccounts
+```
+
+- List all the service accounts in a namespace
+```
+kubectl get serviceaccounts -n NAMESPACE
+pep-dps-latam-globtbloy-prod-sa
+```
+
+- Get detailed information about a specific service account
+```
+kubectl describe serviceaccount -n NAMESPACE <serviceaccount-name>
 ```
 
 
