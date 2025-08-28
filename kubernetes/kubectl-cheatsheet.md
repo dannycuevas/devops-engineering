@@ -1,6 +1,5 @@
 # KUBERNETES COMMANDS
 
-
 -Complete Kubernetes reference guide
 https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands
 
@@ -203,6 +202,11 @@ kubecelt exec -it <POD-NAME> -- sh
 kube -n NAMESPACE logs CONTAINER-NAME-0000
 ```
 
+- Get the logs for a specific Pod, including TIME-stamps
+```
+kube -n NAMESPACE logs CONTAINER-NAME-0000 --timestamps
+```
+
 - Search for a specific Pod, an "nginx" Pod for testing for example, and then remote into it
 ```
 kube get pods -A | rpg nginx
@@ -300,6 +304,30 @@ kubectl get pod --show-labels
 ```
 kubectl label pod <POD-NAME> NEW-LABEL=NEW-VALUE
 ```
+
+- Get the CPU and memory usage for a pod (requires the metrics-server in the cluster)
+```
+kubectl -n NAMESPACE top pod PODNAME
+```
+
+- Get the CPU and memory usage for a pod (requires the metrics-server in the cluster)
+	- if the Pod has multiple containers
+```
+kubectl -n NAMESPACE top pod PODNAME --containers
+```
+
+- Get the CPU and memory usage for a pod (requires the metrics-server in the cluster)
+	- but choose the Pods by Label
+```
+kubectl -n NAMESPACE top pods -l app=myapp
+```
+
+- Get the CPU and memory usage for a pod (requires the metrics-server in the cluster)
+	- and watch them as they refresh every 2 sec
+```
+watch -n 2 "kubectl -n NAMESPACE top pod PODNAME"
+```
+
 
 # CONTAINERS
 
